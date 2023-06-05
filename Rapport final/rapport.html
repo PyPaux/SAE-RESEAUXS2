@@ -1,0 +1,272 @@
+<html>
+    <head>
+        <title>Rapport Final</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <h1 id="rapport-final-sae-2-03">Rapport Final - SAE 2.03</h1>
+    <h2 id="dormael-louis-dhorme-victor-delespierre-jules-groupe-c">DORMAEL Louis, DHORME Victor, DELESPIERRE Jules - Groupe C</h2>
+    <p><a id="1-sommaire"></a></p>
+    <hr>
+    <h2 id="1-sommaire">1. Sommaire</h2>
+    <ol>
+    <li><p><a href="#1-sommaire">Sommaire</a></p>
+    </li>
+    <li><p><a href="#2-introduction">Introduction</a></p>
+    </li>
+    <li><p><a href="#3-installation">Installation de Debian</a></p>
+    </li>
+    <li><p><a href="#4-analyse">Analyse comparative des interfaces clients Git</a></p>
+    </li>
+    <li><p><a href="#5-installationGitea">Installation <em>Gitea</em></a></p>
+    </li>
+    <li><p><a href="#6-utilisationGitea">Utilisation <em>Gitea</em></a></p>
+    </li>
+    <li><p><a href="#7-index">Index</a></p>
+    </li>
+    </ol>
+    <p><a id="2-introduction"></a></p>
+    <hr>
+    <h2 id="2-introduction">2. Introduction</h2>
+    <p>Notre SAE s&#39;est basé sur le système d&#39;exploitation Debian, où nous avons installer un système d&#39;exploitation par plusieurs moyens (Installation graphique, Installation automatisée et sans interface graphique) et installer un logiciel nommé <em>Gitea</em>.</p>
+    <p>Pour commencer : Qu&#39;est-ce <em>Debian</em> ?</p>
+    <p><a id="index-debian"></a></p>
+    <p>Le projet <mark>Debian</mark> est un groupe de développeurs volontaires, qui cherchent à créer un système d&#39;exploitation composé de logiciels libres. A sa création c&#39;est la seule distribution ouverte aux contributions de tout développeur ou utilisateur. C&#39;est toujours <strong>le seul distributeur Linux majeur qui ne soit pas une entité commerciale.</strong> &nbsp;Le nom Debian vient de 2 prénoms celui de l&#39;épouse du créateur de l&#39;OS &quot;Debra&quot; et de son créateur &quot;Ian&quot;, ce qui a donné &quot;Debian&quot;. De plus ce système a un gros atouts, en effet il est compatible avec <a href="https://wiki.debian.org/DebianBullseye#Architectures">9 architectures de processeurs</a>
+    Debian a plusieurs versions, ces versions ont des &quot;durées de vie&quot;, en effet <mark><a href="https://wiki.debian.org/fr/DebianReleases">la durée minimale de prise en charge</a></mark> est environ de 3 ans, pour la durée en <mark><a href="https://wiki.debian.org/fr/LTS">support long terme</a></mark>, le temps est d&#39;environ de 2 ans supplémentaires de la durée minimale. Et la durée en <mark><a href="https://wiki.debian.org/fr/LTS/Extended">support long terme étendue</a></mark> ajoute 5 ans supplémentaires au LTS, 10 ans cumulés. Même s&#39;il est mieux d&#39;avoir la dernière version du système, les mises à jours de sécurité sont assurées pendant la durée minimale et le support à long terme, mais elles ne le sont pas pour le support en long terme étendue. A ce jour les <mark><a href="https://wiki.debian.org/fr/DebianReleases">versions de Debian</a></mark> encore maintenues sont Bullseye et Buster. Les noms des versions sont des <a href="https://wiki.debian.org/DebianBuzz">références</a> à la saga des studios Pixar, &quot;Toy Story&quot;.
+    En effet, la première version sorti en 1996 s&#39;appelle <a href="https://wiki.debian.org/DebianBuzz">Buzz</a>, en réference à Buzz L&#39;éclair, et la dernière s&#39;appelle <a href="https://wiki.debian.org/DebianForky">Forky</a>, le nom de la fourchette dans le dernier opus de la saga.</p>
+    <p><a id="3-installation"></a></p>
+    <hr>
+    <h2 id="3-installation-de-debian">3. Installation de Debian</h2>
+    <p><a id="index-image"></a></p>
+    <p>Pour installer Debian, nous avons utilisé une machine virtuelle ! Il faut d&#39;abord introduire l&#39;<mark>image</mark> (la représentation numérique d&#39;un système d&#39;exploitation utilisée pour installer et configurer le système sur un ordinateur), pour nous donc on a utilisé l&#39;<a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/">image de base de Debian</a>, puis nous avons fait une installation basique.</p>
+    <p><a id="index-iso-architecture"></a></p>
+    <p>L&#39;image est un <mark>fichier iso bootable</mark>, c&#39;est à dire que c&#39;est un fichier d’extension iso, qui contient des composants logiciel, qui peuvent être démarré directement sur l’ordinateur sans passer par un système d’exploitation. Il est donc fortement utilisé pour une installation de système d’exploitation</p>
+    <p>Debian utilise une <mark>architecture</mark> de 64 bits, 64 bits signifie que les informations qu’envoie les informations au processeur, sont codées sur 64 bits, un système d’exploitation 64 bits est donc conçu pour un processeur avec une architecture 64 bits.</p>
+    <p><img src="./photos/installation.png" width="20%" height="20%"></p>
+    <p><a id="index-superutilisateur-partitionnement"></a></p>
+    <p>Durant l&#39;installation, nous devons configurer l&#39;heure, la date, la gestion des utilisateurs et du <mark><a href="https://wiki.debian.org/fr/Root">superutilisateur</a></mark> (utilisateur qui possède tous les droits sur la machine). Pour qu&#39;un utilisateur lambda possède des droits, il faut utiliser la commande <code>adduser user sudo</code> permet d’ajouter l’utilisateur user au groupe sudo.</p>
+    <p>Ensuite l&#39;étape suivante est un peu plus délicate car il s&#39;agit du <mark><a href="https://wiki.debian.org/DiskPartitioning">partitionnement du disque</a></mark>, il permet la création de partitions distinctes pour les fichiers système, les applications et les données utilisateur. Ce partitionnement améliore les performances en réduisant la fragmentation des fichiers et en permettant une gestion plus efficace des disques.</p>
+    <p><img src="./photos/partition.png" width="20%" height="20%"></p>
+    <p><a id="index-commposants"></a></p>
+    <p>Il faut aussi choisir des <mark>composants</mark> qu&#39;on souhaite installer comme MATE, GNOME, un serveur WEB, SSH, ou encore mandataire. MATE est un environnement de bureau (Permet de manier l’ordinateur via un environnement graphique), alors que GNOME est un environnement graphique (dispositif de dialogue homme-machine, dans lequel les objets à manipuler sont dessinés sous forme de pictogrammes à l&#39;écran). Un serveur web est un ordinateur dédié à l&#39;hébergement de sites internet, qui gère les demandes des clients (navigateurs web) en leur transmettant les pages web demandées. Un serveur SSH est un serveur qui permet à des utilisateurs de se connecter de manière sécurisée à un ordinateur distant en utilisant le protocole SSH, pour transférer des fichiers ou exécuter des commandes par exemple. Un serveur mandataire est un serveur qui agit comme un intermédiaire entre un client et d&#39;autres serveurs. Le client envoie une demande à un serveur mandataire, qui se connecte alors au serveur cible et transmet la demande.</p>
+    <p>Ceci est une installation basique de Debian, mais l&#39;utilisateur doit être présent afin de configurer la machine.</p>
+    <p><a id="index-pressed"></a></p>
+    <p>Il existe une façon d&#39;installer un système d&#39;exploitation automatiquement, pour Debian ce système s&#39;appelle <mark><a href="https://wiki.debian.org/DebianInstaller/Preseed"><em>Pressed</em></a></mark> ; c&#39;est est un outil qui permet d&#39;installer automatiquement le système d&#39;exploitation Debian sur un ordinateur sans que l&#39;utilisateur ait à répondre à toutes les questions posées pendant l&#39;installation. Au lieu de cela, il suffit de créer un fichier de configuration contenant toutes les réponses aux questions posées, comme la langue, la zone horaire, le nom d&#39;utilisateur, le mot de passe, etc.</p>
+    <p><a id="4-analyse"></a></p>
+    <hr>
+    <h2 id="4-analyse-comparative-des-interfaces-clients-git">4. Analyse comparative des interfaces clients Git</h2>
+    <p>Qu&#39;est-ce une interface <em>Git</em> ?</p>
+    <p><a id="index-interface-git"></a></p>
+    <p>Une <mark><a href="https://www.atlassian.com/fr/git/tutorials/what-is-git">interface <em>Git</em></a></mark> est une méthode d&#39;interaction avec <a href="https://git-scm.com/"><em>Git</em></a>, un système de contrôle de version distribué open-source utilisé pour suivre les modifications apportées à un ensemble de fichiers au fil du temps.</p>
+    <p>Par exemple, <mark><a href="https://www.atlassian.com/fr/git/tutorials/gitk">Gitk</a></mark> est une interface graphique pour Git, qui permet de visualiser les commits, les branches et les tags d&#39;un projet Git. Gitk est installé avec Git et peut être lancé en utilisant la commande gitk dans le terminal.</p>
+    <p>Les interfaces <em>Git</em> sont nombreuses, à peu-près <strong>une centaine</strong>, allant d&#39;interfaces pour le grand public au interfaces très professionelles, nous en avons choisi 6 :</p>
+    <ul>
+    <li>GitKraken</li>
+    <li>Github Desktop</li>
+    <li>Git GUI</li>
+    <li>Git Bash</li>
+    <li>Git Cola</li>
+    <li>TortoiseGit</li>
+    </ul>
+    <p>Nos critères ont été les suivants :</p>
+    <ul>
+    <li>L&#39;interface est-elle graphique ?</li>
+    <li>L&#39;interface est-elle en ligne de commande ?</li>
+    <li>Est-elle facile d&#39;usage ? (C&#39;est assez relié avec l&#39;interface graphique, car s&#39;il y a une interface graphique, cela est beaucoup plus accessible par tous.)</li>
+    <li>Sur quelles platformes l&#39;interface est disponible ?</li>
+    <li>La licence utilisée par cette interface.</li>
+    <li>Le développeur du service d&#39;intégration de service Git.</li>
+    <li>Si l&#39;interface est personalisable graphiquement.</li>
+    <li>L&#39;interface possède un historique visuel ?</li>
+    <li>Si le support multi-utilisateur est pris en charge.</li>
+    </ul>
+    <table>
+    <thead>
+    <tr>
+    <th>Interface</th>
+    <th>Interface graphique</th>
+    <th>Interface en ligne de commande</th>
+    <th>Niveau de complexité</th>
+    <th>Plateformes prises en charge</th>
+    <th>Licence</th>
+    <th>Intégration de service Git hébergé</th>
+    <th>Personnalisation</th>
+    <th>Historique visuel</th>
+    <th>Support multi-utilisateur</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GitKraken</td>
+    <td>Oui</td>
+    <td>Non</td>
+    <td>Moyen</td>
+    <td>Windows, Mac, Linux</td>
+    <td>Propriétaire</td>
+    <td><a href="https://www.gitkraken.com/">GitKraken</a></td>
+    <td><a href="https://help.gitkraken.com/gitkraken-client/themes/">Personnalisation des couleurs et des thèmes</a></td>
+    <td>Oui, avec des graphiques de flux de travail</td>
+    <td>Oui, avec <a href="https://help.gitkraken.com/gitkraken-client/gitkraken-manage-account/">un panneau de configuration</a></td>
+    </tr>
+    <tr>
+    <td>GitHub Desktop</td>
+    <td>Oui</td>
+    <td>Non</td>
+    <td>Facile</td>
+    <td>Windows, Mac</td>
+    <td>Gratuit</td>
+    <td><a href="https://desktop.github.com/">GitHub Desktop</a></td>
+    <td><a href="https://docs.github.com/fr/desktop/installing-and-configuring-github-desktop/configuring-and-customizing-github-desktop/setting-a-theme-for-github-desktop">Personnalisation limitée</a></td>
+    <td>Oui, avec des graphiques de flux de travail</td>
+    <td>Non</td>
+    </tr>
+    <tr>
+    <td>Git GUI</td>
+    <td>Oui</td>
+    <td>Oui</td>
+    <td>Moyen</td>
+    <td>Windows, Mac, Linux</td>
+    <td>Gratuit</td>
+    <td><a href="https://gitforwindows.org/">Git for Windows</a></td>
+    <td><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration">Personnalisation limitée</a></td>
+    <td>Non</td>
+    <td>Non</td>
+    </tr>
+    <tr>
+    <td>Git Bash</td>
+    <td>Non</td>
+    <td>Oui</td>
+    <td>Élevé</td>
+    <td>Windows, Mac, Linux</td>
+    <td>Gratuit</td>
+    <td><a href="https://gitforwindows.org/">Git for Windows</a></td>
+    <td>Aucune</td>
+    <td>Non</td>
+    <td>Non</td>
+    </tr>
+    <tr>
+    <td>Git Cola</td>
+    <td>Oui</td>
+    <td>Oui</td>
+    <td>Élevé</td>
+    <td>Windows, Mac, Linux</td>
+    <td>Gratuit</td>
+    <td><a href="https://git-cola.github.io/">Git Cola</a></td>
+    <td><a href="https://git-cola.readthedocs.io/en/latest/git-cola.html#configure-your-editor">Personnalisation limitée</a></td>
+    <td>Non</td>
+    <td>Non</td>
+    </tr>
+    <tr>
+    <td>TortoiseGit</td>
+    <td>Oui</td>
+    <td>Non</td>
+    <td>Moyen</td>
+    <td>Windows</td>
+    <td>Gratuit</td>
+    <td><a href="https://tortoisegit.org/">TortoiseGit</a></td>
+    <td><a href="https://tortoisegit.org/docs/tortoisegit/tgit-dug-settings.html">Personnalisation limitée</a></td>
+    <td>Oui, avec des graphiques de flux de travail</td>
+    <td>Non</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><a id="5-installationGitea"></a></p>
+    <hr>
+    <h2 id="5-installation-gitea-">5. Installation <em>Gitea</em></h2>
+    <p><a id="index-gitea-open-source"></a></p>
+    <p><mark><a href="https://gitea.io/en-us/"><em>Gitea</em></a></mark> est une solution open source de gestion de projets Git, qui permet aux développeurs de collaborer sur un même projet en toute simplicité. <em>Gitea</em> est écrit en langage de programmation Go et est conçu pour être léger, rapide et facile à installer et à utiliser.
+    Un logiciel <mark><a href="https://fr.wikipedia.org/wiki/Open_source">Open source</a></mark> signifie que tout le monde a accès à son code source (d&#39;où &quot;open source&quot;), cela permet aux programmeurs de contribuer également sur le logiciel. De plus, ce logiciel est écrit en <a href="https://fr.wikipedia.org/wiki/Go_(langage"><em>Go</em></a>), c&#39;est un langage de programmation developpé par Google en 2007. Il a la réputation d&#39;être simple, sécurisé et rapide, et est proche du langage C.</p>
+    <p><a id="index-binaire"></a></p>
+    <p>La première étape de l&#39;installation est de télécharger le <mark><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">binaire du logiciel</a></mark>, les fichiers binaires sont utilisés pour installer des programmes et bibliothèques sur un système Debian, et ils peuvent être exécutés pour fournir une fonctionnalité à l&#39;utilisateur. Pour notre cas nous allons utiliser la commande suivante.</p>
+    <pre><code class="lang-bash">wget -O gitea http<span class="hljs-variable">s:</span>//<span class="hljs-keyword">dl</span>.gitea.<span class="hljs-keyword">com</span>/gitea/<span class="hljs-number">1.18</span>.<span class="hljs-number">5</span>/gitea-<span class="hljs-number">1.18</span>.<span class="hljs-number">5</span>-linux-amd64
+    </code></pre>
+    <p><a id="index-executable"></a></p>
+    <p>Puis nous allons rendre le <mark>fichier exécutable</mark>, c&#39;est à dire qu&#39;il sera possible pour l&#39;ordinateur de lancer le logiciel, pour cela nous devons le rendre exécutable via la commande <code>chmod</code> qui permet de modifier les permissions des fichiers. Il faut donc se rendre avec le terminal dans le dossier du fichier <em>Gitea</em>.</p>
+    <pre><code class="lang-bash"><span class="hljs-symbol">cd</span> /usr/<span class="hljs-keyword">bin/gitea
+    </span><span class="hljs-symbol">chmod</span> +x fichierinstallation
+    </code></pre>
+    <p>Ensuite, il faut créer l&#39;environnement de <em>Gitea</em>, pour cela tout est inscrit sur <a href="https://docs.gitea.io/en-us/install-from-binary/">le site officiel de <em>Gitea</em></a>. De plus, si on veut que <em>Gitea</em> se lance dès le démarrage, il faut faire une petite manipulation :</p>
+    <ul>
+    <li><p>Créer un fichier nommé <code>gitea.service</code> dans le dossier <code>/etc/systemd/system</code></p>
+    <pre><code class="lang-bash">  <span class="hljs-keyword">cd</span> /etc/systemd/<span class="hljs-built_in">system</span>
+    touch gitea.service
+    </code></pre>
+    </li>
+    <li><p>Ensuite se rendre sur le <a href="https://docs.gitea.io/en-us/install-from-binary/">GitHub associé à ce fichier</a> et copier l&#39;intégralité de ce fichier</p>
+    </li>
+    <li><p>Allumer l&#39;éditeur de texte dans le fichier que nous avions créé</p>
+    <pre><code class="lang-bash">  <span class="hljs-selector-tag">nano</span> <span class="hljs-selector-tag">gitea</span><span class="hljs-selector-class">.service</span>
+    </code></pre>
+    <p>  et coller le fichier GitHub.</p>
+    </li>
+    <li><p>Puis faire les deux commandes suivantes, qui prennent en considération la manipulation que nous venons de faire</p>
+    <pre><code class="lang-bash">  sudo<span class="hljs-keyword"> system</span>ctl enable gitea
+    sudo<span class="hljs-keyword"> system</span>ctl start gitea
+    </code></pre>
+    </li>
+    </ul>
+    <p><a id="6-utilisationGitea"></a></p>
+    <hr>
+    <h2 id="6-utilisation-gitea-">6. Utilisation <em>Gitea</em></h2>
+    <p>Avant d&#39;utiliser <em>Gitea</em>, nous devons faire la première configuration, pour cela nous mettons en base de données <strong>SQLite3</strong>, et nous configurons le compte administrateur :</p>
+    <p><img src="./photos/gitea_admin.png"></p>
+    <p>avec comme mot de passe <strong>gitea</strong> !</p>
+    <p><a id="index-depot"></a></p>
+    <p>L&#39;interface web de Gitea nous permet de mettre un nouveau <mark><a href="https://www.atlassian.com/fr/git/tutorials/setting-up-a-repository">dépôt</a></mark>, un dépot est un nouvel espace virtuel dans  lequel, on peut enregistrer des versions de notre code.</p>
+    <p><img src="./photos/gitea_accueil.png" width=40% height=40%></p>
+    <p>Un problème pourrait se produire dès lors de votre premier dépôt, il faut vérifier que la configuration soit la bonne, et bien regarder si nous avons les permissions de créer des dépôts et déposer des fichiers dessus.</p>
+    <p><a id="7-index"></a></p>
+    <hr>
+    <h2 id="7-index">7. Index</h2>
+    <ul>
+    <li>A<ul>
+    <li><a href="#index-iso-architecture">Architecture</a></li>
+    </ul>
+    </li>
+    <li>B<ul>
+    <li><a href="#index-binaire">fichier Binaire du logiciel</a></li>
+    </ul>
+    </li>
+    <li>C<ul>
+    <li><a href="#index-composants">Composants (Mate, Gnome, serveur WEB, serveur SSH, serveur mandataire)</a></li>
+    </ul>
+    </li>
+    <li>D<ul>
+    <li><a href="#index-debian">Debian</a></li>
+    <li><a href="#index-depot">Depôt <em>Git</em></a></li>
+    <li><a href="#index-debian">Durée minimale de prise en charge</a></li>
+    </ul>
+    </li>
+    <li>E<ul>
+    <li><a href="#index-executable">fichier Éxécutable</a></li>
+    </ul>
+    </li>
+    <li>G<ul>
+    <li><a href="#index-gitea-open-source"><em>Gitea</em></a></li>
+    <li><a href="#index-interface-git">Gitk</a></li>
+    </ul>
+    </li>
+    <li>I<ul>
+    <li><a href="#index-image">Image</a></li>
+    <li><a href="#index-interface-git">Interface <em>Git</em></a></li>
+    <li><a href="#index-iso-architecture">fichier ISO bootable</a></li>
+    </ul>
+    </li>
+    <li>O<ul>
+    <li><a href="#index-gitea-open-source">Open-source</a></li>
+    </ul>
+    </li>
+    <li>P<ul>
+    <li><a href="#index-superutilisateur-partitionnement">Partitionnement du disque</a></li>
+    <li><a href="#index-pressed"><em>Pressed</em></a></li>
+    </ul>
+    </li>
+    <li>S<ul>
+    <li><a href="#index-superutilisateur-partitionnement">Superutilisateur</a></li>
+    <li><a href="#index-debian">Support long terme</a></li>
+    <li><a href="#index-debian">Support long terme étendue</a></li>
+    </ul>
+    </li>
+    </ul>
+</body>
+</html>
